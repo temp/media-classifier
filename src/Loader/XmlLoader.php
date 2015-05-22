@@ -57,5 +57,4 @@ class XmlLoader implements LoaderInterface
 
         return $mediaTypes;
     }
-
 }
