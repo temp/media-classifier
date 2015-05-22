@@ -47,12 +47,12 @@ class MediaClassifier
      */
     public function classify($filename)
     {
-        $mimetype = $this->mimeSniffer->detect($filename, MimeSniffer::RETURN_STRING);
+        $mimetype = $this->mimeSniffer->detect($filename);
 
         if (!$mimetype) {
             return null;
         }
-        
-        return $this->mediaTypes->lookup($mimetype);
+
+        return $this->mediaTypes->lookup((string) $mimetype);
     }
 }
