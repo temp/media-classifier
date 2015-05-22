@@ -51,6 +51,10 @@ checks:
         spacing_around_non_conditional_operators: true
         spacing_of_function_arguments: true
 
+filter:
+    excluded_paths:
+        - tests/*
+
 tools:
     external_code_coverage: true
 
