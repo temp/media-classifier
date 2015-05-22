@@ -99,7 +99,7 @@ class MediaTypeCollection implements \Countable
     }
 
     /**
-     * @param string $name
+     * @param MediaType $mediaType
      *
      * @return $this
      */

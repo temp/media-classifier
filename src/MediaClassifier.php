@@ -49,6 +49,10 @@ class MediaClassifier
     {
         $mimetype = $this->mimeSniffer->detect($filename, MimeSniffer::RETURN_STRING);
 
+        if (!$mimetype) {
+            return null;
+        }
+        
         return $this->mediaTypes->lookup($mimetype);
     }
 }
