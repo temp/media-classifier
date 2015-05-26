@@ -11,6 +11,7 @@
 
 namespace Temp\MediaClassifier;
 
+use Symfony\Component\HttpFoundation\File\File;
 use Temp\MediaClassifier\Model\MediaType;
 use Temp\MediaClassifier\Model\MediaTypeCollection;
 use Temp\MimeSniffer\MimeSniffer;
@@ -28,18 +29,11 @@ class MediaClassifier
     private $mediaTypes;
 
     /**
-     * @var MimeSniffer
-     */
-    private $mimeSniffer;
-
-    /**
      * @param MediaTypeCollection $mediaTypes
-     * @param MimeSniffer         $mimeSniffer
      */
-    public function __construct(MediaTypeCollection $mediaTypes, MimeSniffer $mimeSniffer)
+    public function __construct(MediaTypeCollection $mediaTypes)
     {
         $this->mediaTypes = $mediaTypes;
-        $this->mimeSniffer = $mimeSniffer;
     }
 
     /**
@@ -47,7 +41,9 @@ class MediaClassifier
      */
     public function classify($filename)
     {
-        $mimetype = $this->mimeSniffer->detect($filename);
+        $file = new File($filename);
+        $mimetype = $file->getMimeType();
+        echo $mimetype.PHP_EOL;
 
         if (!$mimetype) {
             return null;

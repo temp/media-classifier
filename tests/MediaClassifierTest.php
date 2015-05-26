@@ -32,12 +32,9 @@ class MediaClassifierTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $mediaTypes = new MediaTypeCollection();
-        $mediaTypes->add(new MediaType('gif', 'image', array('image/gif')));
+        $mediaTypes->add(new MediaType('php', 'text', array('text/x-php')));
 
-        $sniffer = $this->prophesize('Temp\MimeSniffer\MimeSniffer');
-        $sniffer->detect(Argument::cetera())->willReturn('image/gif');
-
-        $this->classifier = new MediaClassifier($mediaTypes, $sniffer->reveal());
+        $this->classifier = new MediaClassifier($mediaTypes);
     }
 
     public function testClassifiy()
@@ -45,6 +42,6 @@ class MediaClassifierTest extends \PHPUnit_Framework_TestCase
         $mediaType = $this->classifier->classify(__FILE__);
 
         $this->assertNotNull($mediaType);
-        $this->assertSame('gif', $mediaType->getName());
+        $this->assertSame('php', $mediaType->getName());
     }
 }
