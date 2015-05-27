@@ -49,10 +49,10 @@ class MediaTypeCollection implements \Countable
      */
     public function add(MediaType $mediaType)
     {
-        $this->mediaTypes[$mediaType->getName()] = $mediaType;
+        $this->mediaTypes[(string) $mediaType] = $mediaType;
 
         foreach ($mediaType->getMimetypes() as $mimetype) {
-            $this->mimetypeMap[$mimetype] = $mediaType->getName();
+            $this->mimetypeMap[$mimetype] = (string) $mediaType;
         }
 
         return $this;
