@@ -43,7 +43,6 @@ class MediaClassifier
     {
         $file = new File($filename);
         $mimetype = $file->getMimeType();
-        echo $mimetype.PHP_EOL;
 
         if (!$mimetype) {
             return null;
