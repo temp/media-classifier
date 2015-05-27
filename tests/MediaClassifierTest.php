@@ -32,16 +32,16 @@ class MediaClassifierTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $mediaTypes = new MediaTypeCollection();
-        $mediaTypes->add(new MediaType('php', 'text', array('text/x-php')));
+        $mediaTypes->add(new MediaType('gif', 'image', array('image/gif')));
 
         $this->classifier = new MediaClassifier($mediaTypes);
     }
 
-    public function testClassifiy()
+    public function testClassify()
     {
-        $mediaType = $this->classifier->classify(__FILE__);
+        $mediaType = $this->classifier->classify(__DIR__ . '/fixture/test.gif');
 
         $this->assertNotNull($mediaType);
-        $this->assertSame('php', $mediaType->getName());
+        $this->assertSame('gif', $mediaType->getName());
     }
 }
