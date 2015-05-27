@@ -58,17 +58,17 @@ EOF;
 
         $this->assertCount(2, $mediatypes);
 
-        $this->assertTrue($mediatypes->has('mp4'));
-        $this->assertSame('mp4', $mediatypes->get('mp4')->getName());
-        $this->assertSame('video', $mediatypes->get('mp4')->getCategory());
-        $this->assertCount(1, $mediatypes->get('mp4')->getMimetypes());
-        $this->assertSame(array('video/mp4'), $mediatypes->get('mp4')->getMimetypes());
+        $this->assertTrue($mediatypes->has('video:mp4'));
+        $this->assertSame('mp4', $mediatypes->get('video:mp4')->getName());
+        $this->assertSame('video', $mediatypes->get('video:mp4')->getCategory());
+        $this->assertCount(1, $mediatypes->get('video:mp4')->getMimetypes());
+        $this->assertSame(array('video/mp4'), $mediatypes->get('video:mp4')->getMimetypes());
 
-        $this->assertTrue($mediatypes->has('jpg'));
-        $this->assertSame('jpg', $mediatypes->get('jpg')->getName());
-        $this->assertSame('image', $mediatypes->get('jpg')->getCategory());
-        $this->assertCount(2, $mediatypes->get('jpg')->getMimetypes());
-        $this->assertSame(array('image/jpg', 'image/jpeg'), $mediatypes->get('jpg')->getMimetypes());
+        $this->assertTrue($mediatypes->has('image:jpg'));
+        $this->assertSame('jpg', $mediatypes->get('image:jpg')->getName());
+        $this->assertSame('image', $mediatypes->get('image:jpg')->getCategory());
+        $this->assertCount(2, $mediatypes->get('image:jpg')->getMimetypes());
+        $this->assertSame(array('image/jpg', 'image/jpeg'), $mediatypes->get('image:jpg')->getMimetypes());
     }
 
 }

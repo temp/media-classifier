@@ -36,8 +36,8 @@ class MediaTypeCollectionTest extends \PHPUnit_Framework_TestCase
         $this->mediatypes->add(new MediaType('jpg', 'image'));
         $this->mediatypes->add(new MediaType('mp4', 'video'));
 
-        $this->assertArrayHasKey('jpg', $this->mediatypes->all());
-        $this->assertArrayHasKey('mp4', $this->mediatypes->all());
+        $this->assertArrayHasKey('image:jpg', $this->mediatypes->all());
+        $this->assertArrayHasKey('video:mp4', $this->mediatypes->all());
     }
 
     public function testRemove()
@@ -47,14 +47,14 @@ class MediaTypeCollectionTest extends \PHPUnit_Framework_TestCase
 
         $this->mediatypes->remove($jpg);
 
-        $this->assertArrayNotHasKey('jpg', $this->mediatypes->all());
+        $this->assertArrayNotHasKey('image:jpg', $this->mediatypes->all());
     }
 
     public function testHas()
     {
         $this->mediatypes->add(new MediaType('mp4', 'video'));
 
-        $this->assertTrue($this->mediatypes->has('mp4'));
+        $this->assertTrue($this->mediatypes->has('video:mp4'));
     }
 
     public function testLookup()
@@ -83,7 +83,7 @@ class MediaTypeCollectionTest extends \PHPUnit_Framework_TestCase
 
         $this->mediatypes->merge($mediatypes);
 
-        $this->assertTrue($this->mediatypes->has('mp4'));
+        $this->assertTrue($this->mediatypes->has('video:mp4'));
     }
 
     public function testCount()

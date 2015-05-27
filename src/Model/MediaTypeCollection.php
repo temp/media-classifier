@@ -105,8 +105,8 @@ class MediaTypeCollection implements \Countable
      */
     public function remove(MediaType $mediaType)
     {
-        if ($this->has($mediaType->getName())) {
-            unset($this->mediaTypes[$mediaType->getName()]);
+        if ($this->has((string) $mediaType)) {
+            unset($this->mediaTypes[(string) $mediaType]);
         }
 
         return null;
