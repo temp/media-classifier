@@ -55,6 +55,14 @@ class MediaType
     /**
      * @return string
      */
+    public function __toString()
+    {
+        return $this->category . ':' . $this->name;
+    }
+
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;

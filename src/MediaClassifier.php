@@ -14,7 +14,6 @@ namespace Temp\MediaClassifier;
 use Symfony\Component\HttpFoundation\File\File;
 use Temp\MediaClassifier\Model\MediaType;
 use Temp\MediaClassifier\Model\MediaTypeCollection;
-use Temp\MimeSniffer\MimeSniffer;
 
 /**
  * Media classifier
@@ -49,5 +48,13 @@ class MediaClassifier
         }
 
         return $this->mediaTypes->lookup((string) $mimetype);
+    }
+
+    /**
+     * @return MediaTypeCollection
+     */
+    public function getCollection()
+    {
+        return $this->mediaTypes;
     }
 }
