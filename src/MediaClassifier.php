@@ -12,6 +12,7 @@
 namespace Temp\MediaClassifier;
 
 use Symfony\Component\HttpFoundation\File\File;
+use Temp\MediaClassifier\Exception\NotFoundException;
 use Temp\MediaClassifier\Model\MediaType;
 use Temp\MediaClassifier\Model\MediaTypeCollection;
 
@@ -29,10 +30,17 @@ class MediaClassifier
 
     /**
      * @param MediaTypeCollection $mediaTypes
+     * @param string              $fallbackMediaType
      */
-    public function __construct(MediaTypeCollection $mediaTypes)
+    public function __construct(MediaTypeCollection $mediaTypes, $fallbackMediaType)
     {
         $this->mediaTypes = $mediaTypes;
+
+        if (!$this->mediaTypes->has($fallbackMediaType)) {
+            throw new NotFoundException("Fallback media type $fallbackMediaType not defined.");
+        }
+
+        $this->fallbackMediaType = $fallbackMediaType;
     }
 
     /**
@@ -42,12 +50,17 @@ class MediaClassifier
     {
         $file = new File($filename);
         $mimetype = $file->getMimeType();
+        $mediaType = null;
 
-        if (!$mimetype) {
-            return null;
+        if ($mimetype) {
+            $mediaType = $this->mediaTypes->lookup($mimetype);
         }
 
-        return $this->mediaTypes->lookup((string) $mimetype);
+        if (!$mediaType) {
+            $mediaType = $this->mediaTypes->get($this->fallbackMediaType);
+        }
+
+        return $mediaType;
     }
 
     /**

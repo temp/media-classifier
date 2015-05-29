@@ -12,7 +12,7 @@
 namespace Temp\MediaClassifier\Exception;
 
 /**
- * Runtime exception for media type
+ * Runtime exception for package media classifier
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */

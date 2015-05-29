@@ -31,6 +31,19 @@ class MediaTypeCollectionTest extends \PHPUnit_Framework_TestCase
         $this->mediatypes = new MediaTypeCollection();
     }
 
+    public function testAddViaConstructor()
+    {
+        $mediatypes = new MediaTypeCollection(
+            array(
+                new MediaType('jpg', 'image'),
+                new MediaType('mp4', 'video')
+            )
+        );
+
+        $this->assertArrayHasKey('image:jpg', $mediatypes->all());
+        $this->assertArrayHasKey('video:mp4', $mediatypes->all());
+    }
+
     public function testAdd()
     {
         $this->mediatypes->add(new MediaType('jpg', 'image'));
@@ -38,6 +51,18 @@ class MediaTypeCollectionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('image:jpg', $this->mediatypes->all());
         $this->assertArrayHasKey('video:mp4', $this->mediatypes->all());
+    }
+
+    public function testGet()
+    {
+        $this->mediatypes->add($mediaType = new MediaType('jpg', 'image'));
+
+        $this->assertSame($mediaType, $this->mediatypes->get('image:jpg'));
+    }
+
+    public function testGetReturnsNullOnNotFound()
+    {
+        $this->assertNull($this->mediatypes->get('image:jpg'));
     }
 
     public function testRemove()
@@ -93,5 +118,17 @@ class MediaTypeCollectionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(2, $this->mediatypes->count());
         $this->assertCount(2, $this->mediatypes);
+    }
+
+    public function testHash()
+    {
+        $mediaType = $this->prophesize('Temp\MediaClassifier\Model\MediaType');
+        $mediaType->__toString()->willReturn('abc');
+        $mediaType->getMimetypes()->willReturn(array());
+        $mediaType->getHash()->willReturn('abc')->shouldBeCalled();
+
+        $this->mediatypes->add($mediaType->reveal());
+
+        $this->assertNotEmpty($this->mediatypes->getHash());
     }
 }

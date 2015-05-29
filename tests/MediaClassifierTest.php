@@ -15,7 +15,6 @@ use Prophecy\Argument;
 use Temp\MediaClassifier\MediaClassifier;
 use Temp\MediaClassifier\Model\MediaType;
 use Temp\MediaClassifier\Model\MediaTypeCollection;
-use Temp\MimeSniffer\MimeSniffer;
 
 /**
  * Media type collection test
@@ -25,23 +24,49 @@ use Temp\MimeSniffer\MimeSniffer;
 class MediaClassifierTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var MediaClassifier
+     * @expectedException \Temp\MediaClassifier\Exception\NotFoundException
      */
-    private $classifier;
-
-    public function setUp()
+    public function testInvalidFallbackMediaType()
     {
         $mediaTypes = new MediaTypeCollection();
         $mediaTypes->add(new MediaType('gif', 'image', array('image/gif')));
 
-        $this->classifier = new MediaClassifier($mediaTypes);
+        new MediaClassifier($mediaTypes, 'image:jpg');
     }
 
-    public function testClassify()
+    public function testClassifyReturnsCorrectMediaType()
     {
-        $mediaType = $this->classifier->classify(__DIR__ . '/fixture/test.gif');
+        $mediaTypes = new MediaTypeCollection();
+        $mediaTypes->add(new MediaType('binary', 'document'));
+        $mediaTypes->add(new MediaType('gif', 'image', array('image/gif')));
+
+        $classifier = new MediaClassifier($mediaTypes, 'image:gif');
+
+        $mediaType = $classifier->classify(__DIR__ . '/fixture/test.gif');
 
         $this->assertNotNull($mediaType);
-        $this->assertSame('gif', $mediaType->getName());
+        $this->assertSame('image:gif', (string) $mediaType);
+    }
+
+    public function testClassifyReturnsFallbackMediaType()
+    {
+        $mediaTypes = new MediaTypeCollection();
+        $mediaTypes->add(new MediaType('binary', 'document'));
+
+        $classifier = new MediaClassifier($mediaTypes, 'document:binary');
+
+        $mediaType = $classifier->classify(__DIR__ . '/fixture/test');
+
+        $this->assertSame('document:binary', (string) $mediaType);
+    }
+
+    public function testGetCollection()
+    {
+        $mediaTypes = new MediaTypeCollection();
+        $mediaTypes->add(new MediaType('gif', 'image', array('image/gif')));
+
+        $classifier = new MediaClassifier($mediaTypes, 'image:gif');
+
+        $this->assertSame($mediaTypes, $classifier->getCollection());
     }
 }

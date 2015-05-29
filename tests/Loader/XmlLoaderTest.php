@@ -31,6 +31,11 @@ class XmlLoaderTest extends \PHPUnit_Framework_TestCase
         $this->loader = new XmlLoader();
     }
 
+    public function testSupports()
+    {
+        $this->assertTrue($this->loader->supports('file'));
+    }
+
     /**
      * {@inheritdoc}
      */

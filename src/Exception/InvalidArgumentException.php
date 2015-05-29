@@ -12,11 +12,11 @@
 namespace Temp\MediaClassifier\Exception;
 
 /**
- * Load exception for package media classifier
+ * Invalid argument exception for package media classifier
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
-class LoadException extends RuntimeException
+class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
 
 }
