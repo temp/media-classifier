@@ -50,7 +50,15 @@ class XmlLoader implements LoaderInterface
                 }
             }
 
-            $mediaType = new MediaType($name, $category, $mimetypes);
+            $attributes = array();
+            if ($mediatypeNode->attributes->count() && $mediatypeNode->attributes->attribute->count()) {
+                foreach ($mediatypeNode->attributes->attribute as $attributeNode) {
+                    $attrs = $attributeNode->attributes();
+                    $attributes[(string) $attrs['key']] = (string) $attributeNode;
+                }
+            }
+
+            $mediaType = new MediaType($name, $category, $mimetypes, $attributes);
 
             $mediaTypes->add($mediaType);
         }

@@ -34,6 +34,11 @@ class MediaType
     private $mimetypes = array();
 
     /**
+     * @var array
+     */
+    private $attributes = array();
+
+    /**
      * @var string
      */
     private $hash;
@@ -42,12 +47,14 @@ class MediaType
      * @param string $name
      * @param string $category
      * @param array  $mimetypes
+     * @param array  $attributes
      */
-    public function __construct($name, $category, array $mimetypes = array())
+    public function __construct($name, $category, array $mimetypes = array(), array $attributes = array())
     {
         $this->name = $name;
         $this->category = $category;
         $this->mimetypes = $mimetypes;
+        $this->attributes = $attributes;
 
         $this->hash = sha1($name . '-' . $category . '-' . implode('-', $mimetypes));
     }
@@ -82,6 +89,29 @@ class MediaType
     public function getMimetypes()
     {
         return $this->mimetypes;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed  $defaultValue
+     *
+     * @return mixed
+     */
+    public function getAttribute($key, $defaultValue = null)
+    {
+        if (!isset($this->attributes[$key])) {
+            return $defaultValue;
+        }
+
+        return $this->attributes[$key];
     }
 
     /**
