@@ -12,11 +12,10 @@
 namespace Temp\MediaClassifier\Exception;
 
 /**
- * Runtime exception for package media classifier
+ * Runtime exception for package media classifier.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
 class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
-
 }

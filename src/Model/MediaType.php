@@ -12,7 +12,7 @@
 namespace Temp\MediaClassifier\Model;
 
 /**
- * Media type
+ * Media type.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
@@ -31,12 +31,12 @@ class MediaType
     /**
      * @var array
      */
-    private $mimetypes = array();
+    private $mimetypes = [];
 
     /**
      * @var array
      */
-    private $attributes = array();
+    private $attributes = [];
 
     /**
      * @var string
@@ -49,14 +49,14 @@ class MediaType
      * @param array  $mimetypes
      * @param array  $attributes
      */
-    public function __construct($name, $category, array $mimetypes = array(), array $attributes = array())
+    public function __construct($name, $category, array $mimetypes = [], array $attributes = [])
     {
         $this->name = $name;
         $this->category = $category;
         $this->mimetypes = $mimetypes;
         $this->attributes = $attributes;
 
-        $this->hash = sha1($name . '-' . $category . '-' . implode('-', $mimetypes));
+        $this->hash = sha1($name.'-'.$category.'-'.implode('-', $mimetypes));
     }
 
     /**
@@ -64,7 +64,7 @@ class MediaType
      */
     public function __toString()
     {
-        return $this->category . ':' . $this->name;
+        return $this->category.':'.$this->name;
     }
 
     /**

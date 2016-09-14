@@ -14,7 +14,7 @@ namespace Temp\MediaClassifier\Loader;
 use Temp\MediaClassifier\Model\MediaTypeCollection;
 
 /**
- * Media type loader interface
+ * Media type loader interface.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */

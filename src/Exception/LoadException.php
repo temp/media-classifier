@@ -12,11 +12,10 @@
 namespace Temp\MediaClassifier\Exception;
 
 /**
- * Load exception for package media classifier
+ * Load exception for package media classifier.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
 class LoadException extends RuntimeException
 {
-
 }

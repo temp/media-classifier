@@ -15,7 +15,7 @@ use Temp\MediaClassifier\Model\MediaType;
 use Temp\MediaClassifier\Model\MediaTypeCollection;
 
 /**
- * XML media type loader
+ * XML media type loader.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
@@ -43,14 +43,14 @@ class XmlLoader implements LoaderInterface
             $name = (string) $attrs['name'];
             $category = (string) $attrs['category'];
 
-            $mimetypes = array();
+            $mimetypes = [];
             if ($mediatypeNode->mimetypes->count() && $mediatypeNode->mimetypes->mimetype->count()) {
                 foreach ($mediatypeNode->mimetypes->mimetype as $mimetypeNode) {
                     $mimetypes[] = (string) $mimetypeNode;
                 }
             }
 
-            $attributes = array();
+            $attributes = [];
             if ($mediatypeNode->attributes->count() && $mediatypeNode->attributes->attribute->count()) {
                 foreach ($mediatypeNode->attributes->attribute as $attributeNode) {
                     $attrs = $attributeNode->attributes();

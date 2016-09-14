@@ -12,10 +12,9 @@
 namespace Temp\MediaClassifier\Tests\Model;
 
 use Temp\MediaClassifier\Model\MediaType;
-use Temp\MediaClassifier\Model\MediaTypeCollection;
 
 /**
- * Media type test
+ * Media type test.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
@@ -33,7 +32,7 @@ class MediaTypeTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultMimetype()
     {
-        $mediaType = new MediaType('jpg', 'image', array('image/jpeg', 'image/jpg'));
+        $mediaType = new MediaType('jpg', 'image', ['image/jpeg', 'image/jpg']);
 
         $this->assertSame('image/jpeg', $mediaType->getDefaultMimetype());
     }

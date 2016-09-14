@@ -12,11 +12,10 @@
 namespace Temp\MediaClassifier\Exception;
 
 /**
- * Not found exception for package media classifier
+ * Not found exception for package media classifier.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
 class NotFoundException extends InvalidArgumentException
 {
-
 }

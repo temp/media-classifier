@@ -15,7 +15,7 @@ use Temp\MediaClassifier\Model\MediaType;
 use Temp\MediaClassifier\Model\MediaTypeCollection;
 
 /**
- * Media type collection test
+ * Media type collection test.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
@@ -34,10 +34,10 @@ class MediaTypeCollectionTest extends \PHPUnit_Framework_TestCase
     public function testAddViaConstructor()
     {
         $mediatypes = new MediaTypeCollection(
-            array(
+            [
                 new MediaType('jpg', 'image'),
-                new MediaType('mp4', 'video')
-            )
+                new MediaType('mp4', 'video'),
+            ]
         );
 
         $this->assertArrayHasKey('image:jpg', $mediatypes->all());
@@ -84,7 +84,7 @@ class MediaTypeCollectionTest extends \PHPUnit_Framework_TestCase
 
     public function testLookup()
     {
-        $this->mediatypes->add($mp4 = new MediaType('mp4', 'video', array('video/mp4')));
+        $this->mediatypes->add($mp4 = new MediaType('mp4', 'video', ['video/mp4']));
 
         $result = $this->mediatypes->lookup('video/mp4');
 
@@ -93,8 +93,8 @@ class MediaTypeCollectionTest extends \PHPUnit_Framework_TestCase
 
     public function testLookupFindsLastOccurance()
     {
-        $this->mediatypes->add(new MediaType('mp4', 'video', array('video/mp4')));
-        $this->mediatypes->add($mpeg4 = new MediaType('mpeg4', 'video', array('video/mp4')));
+        $this->mediatypes->add(new MediaType('mp4', 'video', ['video/mp4']));
+        $this->mediatypes->add($mpeg4 = new MediaType('mpeg4', 'video', ['video/mp4']));
 
         $result = $this->mediatypes->lookup('video/mp4');
 
@@ -124,7 +124,7 @@ class MediaTypeCollectionTest extends \PHPUnit_Framework_TestCase
     {
         $mediaType = $this->prophesize('Temp\MediaClassifier\Model\MediaType');
         $mediaType->__toString()->willReturn('abc');
-        $mediaType->getMimetypes()->willReturn(array());
+        $mediaType->getMimetypes()->willReturn([]);
         $mediaType->getHash()->willReturn('abc')->shouldBeCalled();
 
         $this->mediatypes->add($mediaType->reveal());
