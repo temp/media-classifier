@@ -17,7 +17,7 @@ use Temp\MediaClassifier\Model\MediaType;
 use Temp\MediaClassifier\Model\MediaTypeCollection;
 
 /**
- * Media classifier
+ * Media classifier.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */

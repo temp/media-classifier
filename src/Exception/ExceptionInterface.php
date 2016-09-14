@@ -12,11 +12,10 @@
 namespace Temp\MediaClassifier\Exception;
 
 /**
- * Exception interface for package media classifier
+ * Exception interface for package media classifier.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
 interface ExceptionInterface
 {
-
 }

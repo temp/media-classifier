@@ -12,7 +12,7 @@
 namespace Temp\MediaClassifier\Model;
 
 /**
- * Media type collection
+ * Media type collection.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
@@ -21,19 +21,19 @@ class MediaTypeCollection implements \Countable
     /**
      * @var MediaType[]
      */
-    private $mediaTypes = array();
+    private $mediaTypes = [];
 
     /**
      * @var array
      */
-    private $mimetypeMap = array();
+    private $mimetypeMap = [];
 
     /**
      * Constructor.
      *
      * @param array $mediaTypes
      */
-    public function __construct(array $mediaTypes = array())
+    public function __construct(array $mediaTypes = [])
     {
         foreach ($mediaTypes as $mediaType) {
             $this->add($mediaType);
@@ -41,7 +41,7 @@ class MediaTypeCollection implements \Countable
     }
 
     /**
-     * Add media type
+     * Add media type.
      *
      * @param MediaType $mediaType
      *
@@ -59,7 +59,7 @@ class MediaTypeCollection implements \Countable
     }
 
     /**
-     * Merge collection
+     * Merge collection.
      *
      * @param MediaTypeCollection $collection
      *
@@ -84,8 +84,6 @@ class MediaTypeCollection implements \Countable
         if ($this->has($name)) {
             return $this->mediaTypes[$name];
         }
-
-        return null;
     }
 
     /**
@@ -108,8 +106,6 @@ class MediaTypeCollection implements \Countable
         if ($this->has((string) $mediaType)) {
             unset($this->mediaTypes[(string) $mediaType]);
         }
-
-        return null;
     }
 
     /**
@@ -130,8 +126,6 @@ class MediaTypeCollection implements \Countable
         if (isset($this->mimetypeMap[$mimetype])) {
             return $this->get($this->mimetypeMap[$mimetype]);
         }
-
-        return null;
     }
 
     /**
@@ -139,7 +133,7 @@ class MediaTypeCollection implements \Countable
      */
     public function getHash()
     {
-        $hashes = array();
+        $hashes = [];
         foreach ($this->mediaTypes as $mediaType) {
             $hashes[] = $mediaType->getHash();
         }

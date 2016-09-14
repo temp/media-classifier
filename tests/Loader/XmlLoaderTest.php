@@ -15,7 +15,7 @@ use org\bovigo\vfs\vfsStream;
 use Temp\MediaClassifier\Loader\XmlLoader;
 
 /**
- * XML loader test
+ * XML loader test.
  *
  * @author Stephan Wentz <stephan@wentz.it>
  */
@@ -41,7 +41,7 @@ class XmlLoaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
-        $xml = <<<EOF
+        $xml = <<<'EOF'
 <?xml version="1.0" encoding="UTF-8"?>
 <mediatypes>
     <mediatype name="mp4" category="video">
@@ -57,7 +57,7 @@ class XmlLoaderTest extends \PHPUnit_Framework_TestCase
     </mediatype>
 </mediatypes>
 EOF;
-        vfsStream::setup('root', null, array('types.xml' => $xml));
+        vfsStream::setup('root', null, ['types.xml' => $xml]);
 
         $mediatypes = $this->loader->load(vfsStream::url('root/types.xml'));
 
@@ -67,13 +67,12 @@ EOF;
         $this->assertSame('mp4', $mediatypes->get('video:mp4')->getName());
         $this->assertSame('video', $mediatypes->get('video:mp4')->getCategory());
         $this->assertCount(1, $mediatypes->get('video:mp4')->getMimetypes());
-        $this->assertSame(array('video/mp4'), $mediatypes->get('video:mp4')->getMimetypes());
+        $this->assertSame(['video/mp4'], $mediatypes->get('video:mp4')->getMimetypes());
 
         $this->assertTrue($mediatypes->has('image:jpg'));
         $this->assertSame('jpg', $mediatypes->get('image:jpg')->getName());
         $this->assertSame('image', $mediatypes->get('image:jpg')->getCategory());
         $this->assertCount(2, $mediatypes->get('image:jpg')->getMimetypes());
-        $this->assertSame(array('image/jpg', 'image/jpeg'), $mediatypes->get('image:jpg')->getMimetypes());
+        $this->assertSame(['image/jpg', 'image/jpeg'], $mediatypes->get('image:jpg')->getMimetypes());
     }
-
 }
